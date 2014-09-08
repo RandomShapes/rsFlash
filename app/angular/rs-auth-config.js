@@ -12,4 +12,4 @@ var types = {
 
 var config = {
     timeout: null
-}
+};

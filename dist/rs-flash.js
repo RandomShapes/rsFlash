@@ -18,7 +18,7 @@ var types = {
 
 var config = {
     timeout: null
-}
+};
 function rsFlash() {
 	return {
 		restrict: "E",
