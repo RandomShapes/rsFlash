@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rsAuthApp">
+<head>
+    <meta charset="UTF-8">
+    <title>rsAuth</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    
+    <section class="container" ng-controller="RsFlashCtrl as vm">
+        <h1 class="jumbotron">rs-flash, the best notification system that ever was and ever will be.</h1>
+
+        <rs-flash></rs-flash>
+    </section>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="rs-flash.js"></script>
+    <script>
+    (function() {
+        angular
+            .module('rsFlashApp', ['rs-flash'])
+            .controller('RsFlashCtrl', RsFlashCtrl);
+
+
+        function RsFlashCtrl($rsAuth) {
+            var vm = this;
+
+            
+        }
+
+    })();
+    </script>
+</body>
+</html>
