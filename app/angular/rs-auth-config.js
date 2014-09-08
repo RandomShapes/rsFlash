@@ -9,3 +9,7 @@ var types = {
     warning: "alert-warning",
     danger: "alert-danger"
 };
+
+var config = {
+    timeout: null
+}

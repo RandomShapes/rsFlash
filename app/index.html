@@ -2,7 +2,7 @@
 <html lang="en" ng-app="rsFlashApp">
 <head>
     <meta charset="UTF-8">
-    <title>rsAuth</title>
+    <title>rsWarning</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
@@ -11,6 +11,16 @@
         <h1 class="jumbotron">rs-flash, the best notification system that ever was and ever will be.</h1>
 
         <rs-flash></rs-flash>
+
+        <button ng-click="vm.show()" class="btn btn-primary">Show</button>
+        <button ng-click="vm.hide()" class="btn btn-primary">hide</button>
+        <label for="type">Type</label>
+        <select name="type" id="type" ng-model="vm.type">
+            <option value="success">Success</option>
+            <option value="info">Info</option>
+            <option value="warning">Warning</option>
+            <option value="danger">Danger</option>
+        </select>
     </section>
 
     <script src="bower_components/angular/angular.js"></script>
@@ -19,13 +29,30 @@
     (function() {
         angular
             .module('rsFlashApp', ['rs-flash'])
-            .controller('RsFlashCtrl', RsFlashCtrl);
+            .controller('RsFlashCtrl', RsFlashCtrl)
+            .config(function($rsFlashProvider) {
+                $rsFlashProvider.setTypes({
+                    super: "super-warning"
+                });
+                $rsFlashProvider.config.timeout = 1000;
+            });
 
 
         function RsFlashCtrl($rsFlash) {
             var vm = this;
 
-            
+            vm.show = show;
+            vm.hide = hide;
+            vm.type = "success";
+
+            ///////////////
+
+            function show() {
+                $rsFlash.create('Hello! from RS-Flash',"alert-" + vm.type);
+            }
+            function hide() {
+                $rsFlash.clear();
+            }
         }
 
     })();

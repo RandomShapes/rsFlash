@@ -15,6 +15,10 @@ var types = {
     warning: "alert-warning",
     danger: "alert-danger"
 };
+
+var config = {
+    timeout: null
+}
 function rsFlash() {
 	return {
 		restrict: "E",
@@ -22,17 +26,19 @@ function rsFlash() {
 	};
 }
 function $rsFlash() {
-    this.types = types;
+    this.type = types;
+    this.config = config;
 
     this.setTypes = function(newTypes) {
         angular.extend(types, newTypes);
     };
 
     /* @ngInject */
-    this.$get = function rsFlashFactory($rootScope) {
+    this.$get = function rsFlashFactory($rootScope, $timeout) {
         return {
             create: create,
-            clear: clear
+            clear: clear,
+            type: this.type
         };
     	
         ////////////////////
@@ -42,18 +48,22 @@ function $rsFlash() {
     		$rootScope.flash = message;
     		$rootScope.flashType = flashType;
     		$rootScope.$broadcast(FLASH_EVENTS.show);
-    	}
 
-    	function clear() {
-    		$rootScope.flash = "";
-    		$rootScope.$broadcast(FLASH_EVENTS.hide);
-    	}
+            if(config.timeout) {
+                $timeout(clear, config.timeout);
+            }
+        }
+
+        function clear() {
+            $rootScope.flash = "";
+            $rootScope.$broadcast(FLASH_EVENTS.hide);
+        }
     };
-    this.$get.$inject = ["$rootScope"];
+    this.$get.$inject = ["$rootScope", "$timeout"];
 }
 
 function rsFlashRun($templateCache) {
-    $templateCache.put('rs-flash-template.html', '<div ng-show="flash" class="alert {{flashType}}" role="alert">{{flash}}</div>');
+    $templateCache.put('rs-flash-template.html', '<div ng-show="flash" class="alert {{flashType}}" ng-class="{\'rs-flash-in\': flash,\'rs-flash-out\': !flash}" role="alert">{{flash}}</div>');
 }
 rsFlashRun.$inject = ["$templateCache"]; 
 

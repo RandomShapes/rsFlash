@@ -1,15 +1,17 @@
 function $rsFlash() {
-    this.types = types;
+    this.type = types;
+    this.config = config;
 
     this.setTypes = function(newTypes) {
         angular.extend(types, newTypes);
     };
 
     /* @ngInject */
-    this.$get = function rsFlashFactory($rootScope) {
+    this.$get = function rsFlashFactory($rootScope, $timeout) {
         return {
             create: create,
-            clear: clear
+            clear: clear,
+            type: this.type
         };
     	
         ////////////////////
@@ -19,11 +21,15 @@ function $rsFlash() {
     		$rootScope.flash = message;
     		$rootScope.flashType = flashType;
     		$rootScope.$broadcast(FLASH_EVENTS.show);
-    	}
 
-    	function clear() {
-    		$rootScope.flash = "";
-    		$rootScope.$broadcast(FLASH_EVENTS.hide);
-    	}
+            if(config.timeout) {
+                $timeout(clear, config.timeout);
+            }
+        }
+
+        function clear() {
+            $rootScope.flash = "";
+            $rootScope.$broadcast(FLASH_EVENTS.hide);
+        }
     };
 }
