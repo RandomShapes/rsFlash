@@ -18,11 +18,15 @@ The easiest way to get **rsFlash** is by using bower in your terminal.
 
 Navigate to your project directory and run this command
 
-    bower install --save-dev rs-flash
+```
+bower install --save-dev rs-flash
+```
 
 You can also download [**rsFlash**](https://github.com/RandomShapes/rsFlash/archive/master.zip) and include the library in your project by placing this in your index
 
-    <script src="rsFlash/dist/rs-flash.min.js"><script>
+```HTML
+<script src="rsFlash/dist/rs-flash.min.js"><script>
+```
 
 [Usage](id:usage)
 ======
@@ -94,19 +98,19 @@ function MyCoolCtrl($rsFlash) {
 You can also add your types, this will be bound to the flash as a class so you may style them as you please
 
 ```JavaScript  
-	//put this in your config function
-    $rsFlashProvider.setTypes({
-    	my-custom-type-1: "cool-flash-styles",
-    	my-custom-type-2: "even-cooler-styles"
-    });
-    
-    //you can then call them just as you would any other type
-    $rsFlash.create("Cool custom type bro", $rsFlash.type.my-custom-type-1);
-    
-    //and you can style them as you please
-    .cool-flash-styles {
-    	background-color: #6bae13;
-    }
+//put this in your config function
+$rsFlashProvider.setTypes({
+	my-custom-type-1: "cool-flash-styles",
+	my-custom-type-2: "even-cooler-styles"
+});
+
+//you can then call them just as you would any other type
+$rsFlash.create("Cool custom type bro", $rsFlash.type.my-custom-type-1);
+
+//and you can style them as you please
+.cool-flash-styles {
+	background-color: #6bae13;
+}
 ```
     
 ######[Animation](id:animation)
@@ -115,24 +119,24 @@ You can also add your types, this will be bound to the flash as a class so you m
 Add the `static` flag to true in your config block, this prevents **rsFlash** from automatically hiding, giving you more control.
     
 ```JavaScript  
-    .config(function($rsFlashProvider) {
-    	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
-    	$rsFlashProvider.config.timeout = 1000;
-    });
+.config(function($rsFlashProvider) {
+	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
+	$rsFlashProvider.config.timeout = 1000;
+});
 ```
     
 Once static has been set you can animate to your hearts content using css animations.
 
-```JavaScript
-    //Added when created
-    .rs-flash-in {
-    	//custom-animation-css
-    }
-    
-    //added when cleared
-    .rs-flash-out {
-    	//custom-animation-css
-    }
+```CSS
+//Added when created
+.rs-flash-in {
+	//custom-animation-css
+}
+
+//added when cleared
+.rs-flash-out {
+	//custom-animation-css
+}
 ```
 
 **NOTE**: by default in static mode **rsFlash** will be have the `.rs-flash-out` css class.
