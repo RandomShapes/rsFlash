@@ -6,9 +6,9 @@ Table of Contents
 ======
 1. [Installation](#installation)
 2. [Usage](#usage)
-3. [Configuration](#config)
+3. [Configuration](#uration)
     1. [Auto-hide](#auto-hide) 
-    2. [Custom Types/Classes](#custom) 
+    2. [Custom Types/Classes](#ustom) 
     3. [Animation](#animation) 
 
 [Installation](id:installation)
@@ -71,7 +71,7 @@ You can also download [**$rsFlash**](https://github.com/RandomShapes/rsFlash/arc
         }
     }
     
-[Configuration](id:config)
+[Configuration](id:uration)
 ======
 ######[Auto-hide](id:auto-hide)
 **rsFlash** supports hiding after a fixed amount of time, to enable change the `timeout` flag in the configuration like so
@@ -82,7 +82,7 @@ You can also download [**$rsFlash**](https://github.com/RandomShapes/rsFlash/arc
     	$rsFlashProvider.config.timeout = 1000;
     });
 
-######[Custom Types/Classes](id:custom)
+######[Custom Types/Classes](id:ustom)
 You can also add your types, this will be bound to the flash as a class so you may style them as you please
 
 	//put this in your config function
