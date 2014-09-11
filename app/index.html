@@ -2,7 +2,7 @@
 <html lang="en" ng-app="rsFlashApp">
 <head>
     <meta charset="UTF-8">
-    <title>rsWarning</title>
+    <title>rsFlash</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
@@ -34,7 +34,9 @@
                 $rsFlashProvider.setTypes({
                     super: "super-warning"
                 });
-                $rsFlashProvider.config.timeout = 1000;
+                $rsFlashProvider.config.timeout = null;
+                //Will do animation and things.
+                $rsFlashProvider.config.static = true;
             });
 
 
@@ -48,7 +50,7 @@
             ///////////////
 
             function show() {
-                $rsFlash.create('Hello! from RS-Flash',"alert-" + vm.type);
+                $rsFlash.create('Hello! from rsFlash',"alert-" + vm.type);
             }
             function hide() {
                 $rsFlash.clear();
@@ -57,5 +59,19 @@
 
     })();
     </script>
+    <style>
+        .rs-flash {
+            position: relative;
+            top: 0;
+            -webkit-transition: top 1s;
+
+        }
+        .rs-flash-out {
+            top: -55px;
+        }
+        .rs-flash-in {
+            top: 0;
+        }
+    </style>
 </body>
 </html>

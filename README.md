@@ -17,7 +17,7 @@ Navigate to your project directory and run this command
 
     bower install --save-dev rs-flash
 
-You can also download [**rsFlash**](https://github.com/RandomShapes/rsFlash/archive/master.zip) and include the library in your project by placing this in your index
+You can also download [**$rsFlash**](https://github.com/RandomShapes/rsFlash/archive/master.zip) and include the library in your project by placing this in your index
 
     <script src="rsFlash/dist/rs-flash.min.js"><script>
 
@@ -33,7 +33,7 @@ You can also download [**rsFlash**](https://github.com/RandomShapes/rsFlash/arch
     <!-- add to your html -->
     <rs-flash></rs-flash>
 
-**THIRD** You can inject and use the $rsFlash service very easily.
+**THIRD** You can inject and use the **rsFlash** service very easily.
 
     //inject $rsFlash
     function MyCoolCtrl($rsFlash) {
@@ -71,7 +71,7 @@ You can also download [**rsFlash**](https://github.com/RandomShapes/rsFlash/arch
 [Configuration](id:config)
 ======
 ######Auto-hide
-$rsFlash supports hiding after a fixed amount of time, to enable change the configuration like so
+**rsFlash** supports hiding after a fixed amount of time, to enable change the `timeout` flag in the configuration like so
    
     //Inject $rsFlashProvider into your config.
     .config(function($rsFlashProvider) {
@@ -97,14 +97,24 @@ You can also add your types, this will be bound to the flash as a class so you m
     }
     
 ######Animation
-$rsFlash comes with built in classes that you can edit to add animation
+**rsFlash** comes with built in classes that you can edit to add animation, however you will want to switch **rsFlash** into static mode so that angular doesn't auto hide/show (which breaks animations).
 
-    //Added when shown
+Add the `static` flag to true in your config block, this prevents **rsFlash** from automatically hiding, giving you more control.
+    
+    .config(function($rsFlashProvider) {
+    	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
+    	$rsFlashProvider.config.timeout = 1000;
+    });
+    
+Once static has been set you can animate to your hearts content using css animations.
+
+    //Added when created
     .rs-flash-in {
     	//custom-animation-css
     }
     
-    //added when hidden
+    //added when cleared
     .rs-flash-out {
     	//custom-animation-css
     }
+**NOTE**: by default in static mode **rsFlash** will be have the `.rs-flash-out` css class.

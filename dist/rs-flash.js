@@ -17,7 +17,8 @@ var types = {
 };
 
 var config = {
-    timeout: null
+    timeout: null,
+    static: false
 };
 function rsFlash() {
 	return {
@@ -35,6 +36,8 @@ function $rsFlash() {
 
     /* @ngInject */
     this.$get = function rsFlashFactory($rootScope, $timeout) {
+        initFlash();
+
         return {
             create: create,
             clear: clear,
@@ -42,11 +45,19 @@ function $rsFlash() {
         };
     	
         ////////////////////
-    	
-    	function create(message) {
-    		var flashType = arguments[1] || this.type.info;
-    		$rootScope.flash = message;
-    		$rootScope.flashType = flashType;
+		function initFlash() {
+            $rootScope.rsFlash = {
+                message: "",
+                type: types.info,
+                show: !config.static
+            };
+        }
+        
+        function create(message) {
+            var flashType = arguments[1] || this.type.info;
+    		$rootScope.rsFlash.message = message;
+            $rootScope.rsFlash.type = flashType;
+            $rootScope.rsFlash.show = true;
     		$rootScope.$broadcast(FLASH_EVENTS.show);
 
             if(config.timeout) {
@@ -55,7 +66,10 @@ function $rsFlash() {
         }
 
         function clear() {
-            $rootScope.flash = "";
+            if(!config.static) {
+                $rootScope.rsFlash.message = "";
+            }
+            $rootScope.rsFlash.show = false;
             $rootScope.$broadcast(FLASH_EVENTS.hide);
         }
     };
@@ -63,7 +77,11 @@ function $rsFlash() {
 }
 
 function rsFlashRun($templateCache) {
-    $templateCache.put('rs-flash-template.html', '<div ng-show="flash" class="alert {{flashType}}" ng-class="{\'rs-flash-in\': flash,\'rs-flash-out\': !flash}" role="alert">{{flash}}</div>');
+    if (!config.static) {
+        $templateCache.put('rs-flash-template.html', '<div ng-show="rsFlash.show" class="rs-flash alert {{rsFlash.type}}" ng-class="{\'rs-flash-in\': rsFlash.show,\'rs-flash-out\': !rsFlash.show}" role="alert">{{rsFlash.message}}</div>');
+    } else {
+        $templateCache.put('rs-flash-template.html', '<div class="rs-flash alert {{rsFlash.type}}" ng-class="{\'rs-flash-in\': rsFlash.show,\'rs-flash-out\': !rsFlash.show}" role="alert">{{rsFlash.message}}</div>');
+    }
 }
 rsFlashRun.$inject = ["$templateCache"]; 
 

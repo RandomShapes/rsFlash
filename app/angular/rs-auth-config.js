@@ -11,5 +11,6 @@ var types = {
 };
 
 var config = {
-    timeout: null
+    timeout: null,
+    static: false
 };

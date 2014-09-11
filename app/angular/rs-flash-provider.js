@@ -8,6 +8,8 @@ function $rsFlash() {
 
     /* @ngInject */
     this.$get = function rsFlashFactory($rootScope, $timeout) {
+        initFlash();
+
         return {
             create: create,
             clear: clear,
@@ -15,11 +17,19 @@ function $rsFlash() {
         };
     	
         ////////////////////
-    	
-    	function create(message) {
-    		var flashType = arguments[1] || this.type.info;
-    		$rootScope.flash = message;
-    		$rootScope.flashType = flashType;
+		function initFlash() {
+            $rootScope.rsFlash = {
+                message: "ggg",
+                type: "alert-info",
+                show: !config.static
+            };
+        }
+        
+        function create(message) {
+            var flashType = arguments[1] || this.type.info;
+    		$rootScope.rsFlash.message = message;
+            $rootScope.rsFlash.type = flashType;
+            $rootScope.rsFlash.show = true;
     		$rootScope.$broadcast(FLASH_EVENTS.show);
 
             if(config.timeout) {
@@ -28,7 +38,10 @@ function $rsFlash() {
         }
 
         function clear() {
-            $rootScope.flash = "";
+            if(!config.static) {
+                $rootScope.rsFlash.message = "";
+            }
+            $rootScope.rsFlash.show = false;
             $rootScope.$broadcast(FLASH_EVENTS.hide);
         }
     };
