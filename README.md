@@ -29,62 +29,71 @@ You can also download [**rsFlash**](https://github.com/RandomShapes/rsFlash/arch
 
 **FIRST** add the module as a dependency.
 
-    angular.module('myCoolApp', ['rs-flash']);
+```JavaScript
+angular.module('myCoolApp', ['rs-flash']);
+```
 
 **SECOND** add the directive to your template where ever you'd like.
 
-    <!-- add to your html -->
-    <rs-flash></rs-flash>
+```HTML
+<!-- add to your html -->
+<rs-flash></rs-flash>
+```
 
 **THIRD** You can inject and use the **rsFlash** service very easily.
 
-    //inject $rsFlash
-    function MyCoolCtrl($rsFlash) {
-    	//Create on the fly with default
-        $rsFlash.create("Holy crap! This is awesome.");
-        
-        //bind to the scope, so you can trigger with something like a button.
-        this.showFlashBasic = function() {
-        	$rsFlash.create("This was triggered from a button!");
-        }
-        
-        //Change the type to default Bootstrap alert styles.
-        this.showFlashSuccess = function() {
-        	$rsFlash.create("This was successful", $rsFlash.type.success);
-        }
-        
-        this.showFlashInfo = function() {
-        	$rsFlash.create("This is information", $rsFlash.type.info);
-        }
-        
-        this.showFlashWarning = function() {
-        	$rsFlash.create("This is a warning", $rsFlash.type.warning);
-        }
-        
-        this.showFlashDanger = function() {
-        	$rsFlash.create("You better start freaking out", $rsFlash.type.danger);
-        }
-        
-        //Clear the flash whenever you want!
-        this.clearFlash = function() {
-        	$rsFlash.clear();
-        }
+```JavaScript
+//inject $rsFlash
+function MyCoolCtrl($rsFlash) {
+	//Create on the fly with default
+    $rsFlash.create("Holy crap! This is awesome.");
+    
+    //bind to the scope, so you can trigger with something like a button.
+    this.showFlashBasic = function() {
+    	$rsFlash.create("This was triggered from a button!");
     }
     
+    //Change the type to default Bootstrap alert styles.
+    this.showFlashSuccess = function() {
+    	$rsFlash.create("This was successful", $rsFlash.type.success);
+    }
+    
+    this.showFlashInfo = function() {
+    	$rsFlash.create("This is information", $rsFlash.type.info);
+    }
+    
+    this.showFlashWarning = function() {
+    	$rsFlash.create("This is a warning", $rsFlash.type.warning);
+    }
+    
+    this.showFlashDanger = function() {
+    	$rsFlash.create("You better start freaking out", $rsFlash.type.danger);
+    }
+    
+    //Clear the flash whenever you want!
+    this.clearFlash = function() {
+    	$rsFlash.clear();
+    }
+}
+```    
+
 [Configuration](id:config)
 ======
 ######[Auto-hide](id:auto-hide)
 **rsFlash** supports hiding after a fixed amount of time, to enable change the `timeout` flag in the configuration like so
-   
-    //Inject $rsFlashProvider into your config.
-    .config(function($rsFlashProvider) {
-    	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
-    	$rsFlashProvider.config.timeout = 1000;
-    });
+
+```JavaScript  
+//Inject $rsFlashProvider into your config.
+.config(function($rsFlashProvider) {
+	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
+	$rsFlashProvider.config.timeout = 1000;
+});
+```
 
 ######[Custom Types/Classes](id:custom)
 You can also add your types, this will be bound to the flash as a class so you may style them as you please
 
+```JavaScript  
 	//put this in your config function
     $rsFlashProvider.setTypes({
     	my-custom-type-1: "cool-flash-styles",
@@ -98,19 +107,23 @@ You can also add your types, this will be bound to the flash as a class so you m
     .cool-flash-styles {
     	background-color: #6bae13;
     }
+```
     
 ######[Animation](id:animation)
 **rsFlash** comes with built in classes that you can edit to add animation, however you will want to switch **rsFlash** into static mode so that angular doesn't auto hide/show (which breaks animations).
 
 Add the `static` flag to true in your config block, this prevents **rsFlash** from automatically hiding, giving you more control.
     
+```JavaScript  
     .config(function($rsFlashProvider) {
     	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
     	$rsFlashProvider.config.timeout = 1000;
     });
+```
     
 Once static has been set you can animate to your hearts content using css animations.
 
+```JavaScript
     //Added when created
     .rs-flash-in {
     	//custom-animation-css
@@ -120,4 +133,6 @@ Once static has been set you can animate to your hearts content using css animat
     .rs-flash-out {
     	//custom-animation-css
     }
+```
+
 **NOTE**: by default in static mode **rsFlash** will be have the `.rs-flash-out` css class.
