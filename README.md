@@ -20,7 +20,7 @@ Navigate to your project directory and run this command
 
     bower install --save-dev rs-flash
 
-You can also download [**$rsFlash**](https://github.com/RandomShapes/rsFlash/archive/master.zip) and include the library in your project by placing this in your index
+You can also download [**rsFlash**](https://github.com/RandomShapes/rsFlash/archive/master.zip) and include the library in your project by placing this in your index
 
     <script src="rsFlash/dist/rs-flash.min.js"><script>
 
