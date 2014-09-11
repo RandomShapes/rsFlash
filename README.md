@@ -7,8 +7,9 @@ Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Configuration](#config)
+    3.1. [Animation](#animation)
 
-[Installation](id:installtion)
+[Installation](id:installation)
 ======
 
 The easiest way to get **rsFlash** is by using bower in your terminal.
@@ -96,7 +97,7 @@ You can also add your types, this will be bound to the flash as a class so you m
     	background-color: #6bae13;
     }
     
-######Animation
+######[Animation](id:animation)
 **rsFlash** comes with built in classes that you can edit to add animation, however you will want to switch **rsFlash** into static mode so that angular doesn't auto hide/show (which breaks animations).
 
 Add the `static` flag to true in your config block, this prevents **rsFlash** from automatically hiding, giving you more control.
