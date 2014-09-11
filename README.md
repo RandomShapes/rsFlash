@@ -120,8 +120,7 @@ Add the `static` flag to true in your config block, this prevents **rsFlash** fr
     
 ```JavaScript  
 .config(function($rsFlashProvider) {
-	//Add the timeout configuration in milliseconds. Set it to null and it will never timeout
-	$rsFlashProvider.config.timeout = 1000;
+	$rsFlashProvider.config.static = true;
 });
 ```
     
