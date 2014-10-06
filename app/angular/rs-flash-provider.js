@@ -7,7 +7,7 @@ function $rsFlash() {
     };
 
     /* @ngInject */
-    this.$get = function rsFlashFactory($rootScope, $timeout) {
+    this.$get = function rsFlashFactory($rootScope, $timeout, $anchorScroll, $location) {
         initFlash();
 
         return {
@@ -31,6 +31,8 @@ function $rsFlash() {
             $rootScope.rsFlash.type = flashType;
             $rootScope.rsFlash.show = true;
     		$rootScope.$broadcast(FLASH_EVENTS.show);
+            $location.hash('flash');
+            $anchorScroll();
 
             if(config.timeout) {
                 $timeout(clear, config.timeout);
