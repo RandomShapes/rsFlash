@@ -47,7 +47,7 @@ function $rsFlash() {
         ////////////////////
 		function initFlash() {
             $rootScope.rsFlash = {
-                message: "ggg",
+                message: "",
                 type: "alert-info",
                 show: !config.static
             };
